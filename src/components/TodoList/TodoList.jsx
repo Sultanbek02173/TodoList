@@ -1,25 +1,41 @@
-export const TodoList = ({todo}) => {
+import { MdDelete } from "react-icons/md";
+import { BiSolidEdit } from "react-icons/bi";
+import { EditTodo } from "../EditTodo/EditTodo";
+
+export const TodoList = ({todo, deleteTodo, complateTodo, editTodo, changeText}) => {
     return (
         <div className="todoCont">
             <h1>Todo List</h1>
             <input placeholder="search todos" type="text" />
             {
                 todo && 
-                todo.map((item) => (
-                  <div className="todoItem">
-                    <p>{item.text}</p>
-                    <button>delete</button>
+                todo.map((item, index) => (
+                  <div key={index} className="todoItem">
+                    {
+                        item.isEdit === true ? (
+                            <EditTodo text={item.text} id={item.id} changeText={changeText} />
+                        )
+                        :
+                        (
+                            <>
+                            <p className={item.complete ? 'complate' : ''} onClick={() => complateTodo(item.id)}>{item.text}</p>
+                            <div>
+                                <button className="deleteBtn" onClick={() => {editTodo(item.id)}}>
+                                    <BiSolidEdit color="white" /> 
+                                </button>
+                                <button className="deleteBtn" onClick={() => deleteTodo(item.id)}>
+                                    <MdDelete color="white" />
+                                </button>
+                            </div>
+                            </>
+                        )
+                         
+                    }
+                    
+                   
                 </div>  
                 ))
             }
-            {/* <div className="todoItem">
-                <p>go to the park</p>
-                <button>delete</button>
-            </div>
-            <div className="todoItem">
-                <p>go to the park</p>
-                <button>delete</button>
-            </div> */}
         </div>
     );
 }

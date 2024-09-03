@@ -53,3 +53,17 @@ body{
     color: #fff;
 
 }
+
+.deleteBtn{
+    background-color: transparent;
+    border: none;
+    padding-left: 10px;
+}
+
+.todoItem p {
+    cursor: pointer;
+}
+
+.todoItem .complate{
+    text-decoration: line-through;
+}
